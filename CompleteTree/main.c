@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include "CompleteTree.h"
 int main()
@@ -17,6 +16,7 @@ int main()
 	{
 		add(&st, a[i]);
 	}
+	printLEN(&st);
 	while (1)
 	{
 		printf("1: search, 2: child of, 3: parent of, 4: sibling of"
@@ -66,7 +66,7 @@ int main()
 				if (s != -1)
 					printf("%d utgatai zangilaanii ah duu n %d", x, st.dat[s]);
 				else
-					printf("%d utgatai zangilaa ah duugui %d", x);
+					printf("%d utgatai zangilaa ah duugui ", x);
 			}
 			break;
 
@@ -104,7 +104,7 @@ int main()
 			if (pos == -1)
 				printf("%d utga oldsongui\n", x);
 			else
-				height(&st, pos);
+				printf("%d utgiin undur ni %d\n", x, height(&st, pos));
 			break;
 		case 9:
 			preorder(&st, 0);
@@ -116,7 +116,14 @@ int main()
 			inorder(&st, 0);
 			break;
 		case 12:
-			leaves(&st, 0);
+			printf("Xaix toog oruul: ");
+			scanf("%d", &x);
+			pos = find(&st, x);
+			if (pos == -1)
+				printf("%d utga oldsongui\n", x);
+			else
+				leaves(&st, 0);
+			break;
 			break;
 		default:
 			exit(0);
