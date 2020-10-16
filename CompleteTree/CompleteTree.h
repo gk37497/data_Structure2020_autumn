@@ -27,11 +27,11 @@ void release(struct Tree *p)
 	free(p->dat);
 	p->dat = NULL;
 }
-void printLEN(struct Tree *p)
-{
-	printf("len =  %d \n", p->len);
-	printf("size =  %d \n", p->size);
-}
+// void printLEN(struct Tree *p)
+// {
+// 	printf("len =  %d \n", p->len);
+// 	printf("size =  %d \n", p->size);
+// }
 /* p-ийн зааж буй Tree-с x тоог хайн олдсон байрлалыг буцаана.
    Олдохгүй бол -1 утгыг буцаана.
  */
@@ -72,16 +72,16 @@ void leaves(struct Tree *p, int idx)
 {
 	/* Энд навчуудыг үйлдлийг хийнэ үү */
 
-	// int pos = idx;
-	// if (idx < p->len)
-	// {
-	// 	if (idx * 2 + 1 > p->len)
-	// 	{
-	// 		printf("%d \n", p->dat[idx]);
-	// 	}
-	// 	leaves(p, idx * 2 + 1);
-	// 	leaves(p, idx * 2 + 2);
-	// }
+	int pos = idx;
+	if (idx < p->size)
+	{
+		if (idx * 2 + 1 > p->size)
+		{
+			printf("%d \n", p->dat[idx]);
+		}
+		leaves(p, idx * 2 + 1);
+		leaves(p, idx * 2 + 2);
+	}
 }
 
 /* p-ийн зааж буй Tree-д idx зангилаанаас доошхи бүх үр садыг хэвлэнэ  */
@@ -193,6 +193,6 @@ void postorder(struct Tree *p, int idx)
  */
 int level(struct Tree *p, int idx)
 {
-	return 0;
+	return 0; //hiigeegui
 }
 #endif

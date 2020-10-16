@@ -56,6 +56,7 @@ int pop(struct Stack *s)
 		return 0;
 	}
 	s->top = temp->next;
+	delete temp;
 	return temp->data;
 }
 

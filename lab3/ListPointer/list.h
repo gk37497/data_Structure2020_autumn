@@ -43,33 +43,24 @@ int empty(struct List *p)
 void insert(struct List *p, int x, int pos)
 {
 	/* Энд оруулах үйлдлийг хийнэ үү */
-	Node *temp = new Node;
-	Node *pointer = p->root;
-	temp->data = x;
-	if (p->root == NULL)
-	{
-		p->root = temp;
-	}
-	else
-	{
-		int counter = 0;
-		while (counter != pos)
-		{
-			pointer = pointer->next;
-			counter++;
-		}
-		temp->next = pointer->next;
-		pointer = temp;
-	}
-
-	// struct Node *temp = new Node;
+	// Node *temp = new Node;
+	// Node *pointer = p->root;
 	// temp->data = x;
-	// p->root = temp;
-	// for (int i = 0; i < pos; i++)
+	// if (p->root == NULL)
 	// {
-	// 	temp = temp->next;
+	// 	p->root = temp;
 	// }
-	// temp = temp->next->next;
+	// else
+	// {
+	// 	int counter = 0;
+	// 	while (counter != pos)
+	// 	{
+	// 		pointer = pointer->next;
+	// 		counter++;
+	// 	}
+	// 	temp->next = pointer->next;
+	// 	pointer = temp;
+	// }
 }
 
 /* p-ийн зааж буй List-н pos байралаас гарган буцаана.

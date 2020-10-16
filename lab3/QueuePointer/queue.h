@@ -45,6 +45,7 @@ void enQueue(struct Queue *q, int x)
 	/* Энд оруулах үйлдлийг хийнэ үү */
 	struct Node *temp = new Node;
 	temp->data = x;
+	temp->next = NULL;
 	if (q->head == NULL && q->tail == NULL)
 	{
 		q->head = q->tail = temp;

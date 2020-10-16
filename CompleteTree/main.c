@@ -16,7 +16,7 @@ int main()
 	{
 		add(&st, a[i]);
 	}
-	printLEN(&st);
+	// printLEN(&st);
 	while (1)
 	{
 		printf("1: search, 2: child of, 3: parent of, 4: sibling of"
@@ -125,7 +125,7 @@ int main()
 			if (pos == -1)
 				printf("%d utga oldsongui\n", x);
 			else
-				leaves(&st, 0);
+				leaves(&st, pos);
 			printf("pos  = %d\n", pos);
 			break;
 			break;
