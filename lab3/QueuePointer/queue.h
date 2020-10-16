@@ -48,39 +48,26 @@ void enQueue(struct Queue *q, int x)
 	if (q->head == NULL && q->tail == NULL)
 	{
 		q->head = q->tail = temp;
-		return;
 	}
-	q->tail->next = temp;
-	q->tail = temp;
+	else
+	{
+		q->tail->next = temp;
+		q->tail = temp;
+	}
 }
 
 /* q-ийн зааж буй Queue-с гарган буцаана */
 int deQueue(struct Queue *q)
 {
 	/* Энд гаргах үйлдлийг хийнэ үү */
-	// Node *temp = q->tail;
-	// if (q->tail == NULL)
-	// {
-	// 	error = 1;
-	// 	return 0;
-	// }
-	// q->tail = q->tail->next;
-	// if (q->tail->next == NULL)
-	// {
-	// 	q->head = NULL;
-	// }
-
-	// struct Node *temp = q->tail;
-	// q->tail = q->tail->next;
-	// return temp->data;
-	// Node *temp = front;
-	//     front = front->next;
-
-	//     // If front becomes NULL, then
-	//     // change rear also as NULL
-	//     if (front == NULL)
-	//         rear = NULL;
-	return 0;
+	if (q->head == NULL)
+	{
+		return error = 1;
+	}
+	struct Node *temp = q->head;
+	q->head = q->head->next;
+	delete temp;
+	return temp->data;
 }
 
 /* q-ийн зааж буй Queue-н утгуудыг хэвлэнэ */
@@ -102,8 +89,7 @@ int front(struct Queue *q)
 {
 	if (q->tail == NULL && q->head == NULL)
 	{
-		error = 1;
-		return 0;
+		return error = 1;
 	}
 	return q->head->data;
 }
@@ -114,8 +100,7 @@ int back(struct Queue *q)
 {
 	if (q->tail == NULL && q->head == NULL)
 	{
-		error = 1;
-		return 0;
+		return error = 1;
 	}
 
 	return q->tail->data;
