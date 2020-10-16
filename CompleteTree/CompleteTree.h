@@ -63,7 +63,6 @@ int height(struct Tree *p, int idx)
 void add(struct Tree *p, int x)
 {
 	/* Энд оруулах үйлдлийг хийнэ үү */
-
 	p->dat[p->size] = x;
 	p->size++;
 }
@@ -72,21 +71,16 @@ void add(struct Tree *p, int x)
 void leaves(struct Tree *p, int idx)
 {
 	/* Энд навчуудыг үйлдлийг хийнэ үү */
-	while (idx < p->len)
-	{
-		idx = idx * 2 + 1;
-	}
-	printf("%d \n", p->dat[(idx - 1) / 2]);
-	// int h = height(p, idx);
-	// int i = 0;
-	// while (h > 1)
+
+	// int pos = idx;
+	// if (idx < p->len)
 	// {
-	// 	i = i * 2 + 1;
-	// 	h--;
-	// }
-	// for (int i = 0; i < p->size; i++)
-	// {
-	// 	printf("%d ", p->dat[i]);
+	// 	if (idx * 2 + 1 > p->len)
+	// 	{
+	// 		printf("%d \n", p->dat[idx]);
+	// 	}
+	// 	leaves(p, idx * 2 + 1);
+	// 	leaves(p, idx * 2 + 2);
 	// }
 }
 
@@ -121,26 +115,12 @@ void ancestors(struct Tree *p, int idx)
  */
 int sibling(struct Tree *p, int idx)
 {
-	// /* Энд ах, дүүг олох үйлдлийг хийнэ үү */
-	// if (idx % 2 == 0)
-	// {
-	// 	if (p->dat[idx - 1] == NULL)
-	// 		return -1;
-	// 	return idx - 1;
-	// }
-	// else
-	// {
-	// 	if (p->dat[idx + 1] == NULL)
-	// 		return -1;
-	// 	return idx + 1;
-	// }
-
-	// if (0 == idx % 2)
-	// 	return idx - 1;
-	// if (0 != idx % 2 && idx + 1 < p->size)
-	// 	return idx + 1;
-	// else
-	return idx;
+	if (0 == idx % 2)
+		return idx - 1;
+	if (0 != idx % 2 && idx + 1 < p->size)
+		return idx + 1;
+	else
+		return -1;
 }
 
 /* p-ийн зааж буй Tree-д idx дугаартай зангилааны хүүхдүүдийн утгыг хэвлэ.

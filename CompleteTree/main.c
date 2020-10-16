@@ -64,9 +64,12 @@ int main()
 			{
 				int s = sibling(&st, pos);
 				if (s != -1)
-					printf("%d utgatai zangilaanii ah duu n %d", x, st.dat[s]);
+				{
+					printf("%d utgatai zangilaanii ah duu n ", x);
+					printf("%d \n", st.dat[s]);
+				}
 				else
-					printf("%d utgatai zangilaa ah duugui ", x);
+					printf("%d utgatai zangilaa ah duugui \n", x);
 			}
 			break;
 
@@ -123,6 +126,7 @@ int main()
 				printf("%d utga oldsongui\n", x);
 			else
 				leaves(&st, 0);
+			printf("pos  = %d\n", pos);
 			break;
 			break;
 		default:

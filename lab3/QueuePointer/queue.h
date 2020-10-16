@@ -58,17 +58,17 @@ void enQueue(struct Queue *q, int x)
 int deQueue(struct Queue *q)
 {
 	/* Энд гаргах үйлдлийг хийнэ үү */
-	Node *temp = q->tail;
-	if (q->tail == NULL)
-	{
-		error = 1;
-		return 0;
-	}
-	q->tail = q->tail->next;
-	if (q->tail->next == NULL)
-	{
-		q->head = NULL;
-	}
+	// Node *temp = q->tail;
+	// if (q->tail == NULL)
+	// {
+	// 	error = 1;
+	// 	return 0;
+	// }
+	// q->tail = q->tail->next;
+	// if (q->tail->next == NULL)
+	// {
+	// 	q->head = NULL;
+	// }
 
 	// struct Node *temp = q->tail;
 	// q->tail = q->tail->next;
