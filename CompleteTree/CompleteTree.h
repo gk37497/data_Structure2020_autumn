@@ -50,7 +50,7 @@ int find(struct Tree *p, int x)
 /* p-ийн зааж буй модноос idx-ээр root хийсэн дэд модны  Tree-ийн өндрийг буцаана */
 int height(struct Tree *p, int idx)
 {
-	int hei = 1;
+	int hei = 0;
 	while (idx > 0)
 	{
 		idx = (idx - 1) / 2;
