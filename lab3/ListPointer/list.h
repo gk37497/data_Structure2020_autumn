@@ -43,24 +43,51 @@ int empty(struct List *p)
 void insert(struct List *p, int x, int pos)
 {
 	/* Энд оруулах үйлдлийг хийнэ үү */
-	// Node *temp = new Node;
-	// Node *pointer = p->root;
-	// temp->data = x;
-	// if (p->root == NULL)
-	// {
-	// 	p->root = temp;
-	// }
-	// else
-	// {
-	// 	int counter = 0;
-	// 	while (counter != pos)
-	// 	{
-	// 		pointer = pointer->next;
-	// 		counter++;
-	// 	}
-	// 	temp->next = pointer->next;
-	// 	pointer = temp;
-	// }
+	Node *temp = new Node;
+	Node *pointer = p->root;
+	int counter = 0;
+	temp->data = x;
+	if (p->root == NULL)
+	{
+		if (pos > 0)
+		{
+			error = 2;
+			return;
+		}
+
+		p->root = temp;
+		temp->next = NULL;
+	}
+	else
+	{
+		if (pos == 0)
+		{
+			p->root = temp;
+			temp->next = pointer;
+		}
+		while (pointer != NULL)
+		{
+			pointer = pointer->next;
+			counter++;
+		}
+		if (counter + 1 <= pos)
+		{
+			error = 2;
+			return;
+		}
+		else
+		{
+			counter = 0;
+			pointer = p->root;
+			while (counter != pos - 1)
+			{
+				pointer = pointer->next;
+				counter++;
+			}
+			temp->next = pointer->next;
+			pointer->next = temp;
+		}
+	}
 }
 
 /* p-ийн зааж буй List-н pos байралаас гарган буцаана.
@@ -68,14 +95,56 @@ void insert(struct List *p, int x, int pos)
  */
 int removes(struct List *p, int pos)
 {
-	/* Энд гаргах үйлдлийг хийнэ үү */
-	return 0;
+	int counter = 0;
+	Node *pointer = p->root;
+	Node *temp;
+	Node *saver = new Node;
+
+	if (pointer == NULL)
+	{
+		return error = 1;
+	}
+	while (pointer->next != NULL)
+	{
+		pointer = pointer->next;
+		counter++;
+	}
+	if (pos >= counter + 1)
+	{
+		return error = 3;
+	}
+	else
+	{
+		counter = 0;
+		pointer = p->root;
+		if (pos == 0)
+		{
+			temp = pointer;
+			// temp = NULL;
+			p->root = p->root->next;
+			delete pointer;
+			return temp->data;
+		}
+		else
+		{
+			while (counter != pos - 1)
+			{
+				pointer = pointer->next;
+				counter++;
+			}
+			temp = pointer->next;
+			saver = pointer->next;
+			pointer->next = pointer->next->next;
+			saver = NULL;
+			delete saver;
+			return temp->data;
+		}
+	}
 }
 /* p-ийн зааж буй List-н утгуудыг хэвлэнэ */
 void print(struct List *p)
 {
 	Node *temp = p->root;
-	/* Энд хэвлэх үйлдлийг хийнэ үү */
 	while (temp != NULL)
 	{
 		printf("%d ", temp->data);
@@ -89,7 +158,7 @@ void print(struct List *p)
 int find(struct List *p, int x)
 {
 	Node *temp = p->root;
-	int pos = 1;
+	int pos = 0;
 	while (temp != NULL)
 	{
 		if (temp->data == x)

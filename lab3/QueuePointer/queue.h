@@ -50,6 +50,10 @@ void enQueue(struct Queue *q, int x)
 	{
 		q->head = q->tail = temp;
 	}
+	if (q->head == NULL)
+	{
+	}
+
 	else
 	{
 		q->tail->next = temp;
@@ -66,9 +70,10 @@ int deQueue(struct Queue *q)
 		return error = 1;
 	}
 	struct Node *temp = q->head;
+	struct Node *haha = temp;
 	q->head = q->head->next;
 	delete temp;
-	return temp->data;
+	return haha->data;
 }
 
 /* q-ийн зааж буй Queue-н утгуудыг хэвлэнэ */
