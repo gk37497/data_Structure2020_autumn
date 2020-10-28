@@ -119,25 +119,30 @@ int removes(struct List *p, int pos)
 		pointer = p->root;
 		if (pos == 0)
 		{
-			temp = pointer;
+			int data;
+			data = pointer->data;
+			// temp = pointer;
 			// temp = NULL;
 			p->root = p->root->next;
+			//pointer = NULL;
 			delete pointer;
-			return temp->data;
+			return data;
 		}
 		else
 		{
+			int data;
 			while (counter != pos - 1)
 			{
 				pointer = pointer->next;
 				counter++;
 			}
 			temp = pointer->next;
+			data = temp->data;
 			saver = pointer->next;
 			pointer->next = pointer->next->next;
 			saver = NULL;
 			delete saver;
-			return temp->data;
+			return data;
 		}
 	}
 }
