@@ -35,24 +35,24 @@ void merge(int *out, int *a, int *b, int a_l, int b_l)
 //a хүснэгтийн begin-ээс end завсарт орших элементүүдийг эрэмбэл
 void merge_sort(int *a, int begin, int end)
 {
-    // if (begin < end)
-    // {
-    //     int mid = (begin + end) / 2;
-    //     int n1 = mid - begin + 1;
-    //     int n2 = end - mid;
-    //     int arr1[n1], arr2[n2];
-    //     for (int i = 0; i < n1; i++)
-    //     {
-    //         arr1[i] = a[begin + i];
-    //     }
-    //     for (int j = 0; j < n2; j++)
-    //     {
-    //         arr2[j] = a[mid + 1 + j];
-    //     }
-    //     merge_sort(a, begin, mid);
-    //     merge_sort(a, mid + 1, end);
-    //     merge(a, arr1, arr2, n1, n2);
-    // }
+    if (begin < end)
+    {
+        int mid = (begin + end) / 2;
+        int n1 = mid - begin + 1;
+        int n2 = end - mid;
+        int arr1[n1], arr2[n2];
+        // for (int i = 0; i < n1; i++)
+        // {
+        //     arr1[i] = a[begin + i];
+        // }
+        // for (int j = 0; j < n2; j++)
+        // {
+        //     arr2[j] = a[mid + 1 + j];
+        // }
+        merge_sort(a, mid + 1, end);
+        merge_sort(a, begin, mid);
+        merge(a, arr1, arr2, n1, n2);
+    }
 }
 int main()
 {
