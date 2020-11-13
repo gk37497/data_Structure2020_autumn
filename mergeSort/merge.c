@@ -31,27 +31,27 @@ void merge(int *out, int *a, int *b, int a_l, int b_l)
         j++;
         k++;
     }
-    printf("------husnegt 1 = ");
+    // printf("------husnegt 1 = ");
 
-    for (int i = 0; i < a_l; i++)
-    {
-        printf("%d , ", a[i]);
-    }
-    printf("\n ");
-    printf("-----husnegt 2 = ");
+    // for (int i = 0; i < a_l; i++)
+    // {
+    //     printf("%d , ", a[i]);
+    // }
+    // printf("\n ");
+    // printf("-----husnegt 2 = ");
 
-    for (int i = 0; i < b_l; i++)
-    {
-        printf("%d , ", b[i]);
-    }
-    printf("\n ");
-    printf("erembelegdsen husnegt = ");
+    // for (int i = 0; i < b_l; i++)
+    // {
+    //     printf("%d , ", b[i]);
+    // }
+    // printf("\n ");
+    // printf("erembelegdsen husnegt = ");
 
-    for (int i = 0; i < a_l + b_l; i++)
-    {
-        printf("%d , ", out[i]);
-    }
-    printf("\n ");
+    // for (int i = 0; i < a_l + b_l; i++)
+    // {
+    //     printf("%d , ", out[i]);
+    // }
+    // printf("\n ");
 }
 //a хүснэгтийн begin-ээс end завсарт орших элементүүдийг эрэмбэл
 void merge_sort(int *a, int begin, int end)
@@ -67,23 +67,23 @@ void merge_sort(int *a, int begin, int end)
             arr1[i] = a[begin + i];
             // printf("%d ", arr1[i]);
         }
-        printf("arr1 = ");
-        for (int k = 0; k < n1; k++)
-        {
-            printf("%d , ", arr1[k]);
-        }
+        // printf("arr1 = ");
+        // for (int k = 0; k < n1; k++)
+        // {
+        //     printf("%d , ", arr1[k]);
+        // }
         printf("\n");
         for (int j = 0; j <= n2; j++)
         {
             arr2[j] = a[mid + 1 + j];
             // printf("%d ", arr2[j]);
         }
-        printf("arr2 = ");
-        for (int k = 0; k < n2; k++)
-        {
-            printf("%d , ", arr2[k]);
-        }
-        printf("\n");
+        // printf("arr2 = ");
+        // for (int k = 0; k < n2; k++)
+        // {
+        //     printf("%d , ", arr2[k]);
+        // }
+        // printf("\n");
         merge_sort(a, begin, mid);
         merge_sort(a, mid + 1, end);
         //----------------------
@@ -94,13 +94,14 @@ void merge_sort(int *a, int begin, int end)
         // }
         int out[mid - begin];
         // //-----------------------------
-        merge(a + begin, arr1, arr2, n1, n2);
-        // printf("--\n");
-        // for (int i = 0; i < end - begin; i++)
+        merge(begin + a, arr1, arr2, n1, n2);
+        // printf("hkfjhjkdfhks--\n");
+        // for (int i = 0; i < end - begin + 1; i++)
         // {
         //     printf("%d ", out[i]);
         //     a[begin + i] = out[i];
         // }
+        // printf("\n");
     }
 }
 int main()

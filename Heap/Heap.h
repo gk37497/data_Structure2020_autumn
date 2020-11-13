@@ -40,14 +40,16 @@ void heap_Up(struct Heap *p, int idx)
 	if (idx > 0)
 	{
 		if (p->dat[idx] > p->dat[(idx - 1) / 2])
+		{
 			swap(p->dat, idx, ((idx - 1) / 2));
-		heap_Up(p, (idx - 1) / 2);
+			heap_Up(p, (idx - 1) / 2);
+		}
 	}
 }
 /*p-ийн зааж буй Heap-ийн idx элементийг хүүхдүүдтэй нь жишиж байрыг солих замаар зөв байрлалд оруулах*/
 void heap_Down(struct Heap *p, int idx)
 {
-	if (p->dat[idx] < p->dat[idx * 2 + 1] || p->dat[idx] < p->dat[idx * 2 + 2])
+	if (((idx * 2 + 1) < p->size && p->dat[idx] < p->dat[idx * 2 + 1]) || (p->dat[idx] < p->dat[idx * 2 + 2] && p->size > (idx * 2 + 2)))
 	{
 		if (p->dat[idx * 2 + 1] < p->dat[idx * 2 + 2] && p->size > idx * 2 + 2)
 		{
