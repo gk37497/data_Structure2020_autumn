@@ -47,16 +47,6 @@ int height(struct Node *root)
 			return (rightTree + 1);
 	}
 }
-int max(int a, int b)
-{
-	return (a > b) ? a : b;
-}
-int getBalance(struct Node *N)
-{
-	if (N == NULL)
-		return 0;
-	return height(N->left_child) - height(N->right_child);
-}
 /* root-ийн зааж буй дэд модноос x тоог хайн, олдсон node-ийн хаягийг буцаана.
    Олдохгүй бол null утгыг буцаана.
  */
@@ -79,32 +69,6 @@ struct Node *find(struct Node *root, int d)
 	else
 		return find(root->left_child, d);
 }
-struct Node *rightRotate(struct Node *y)
-{
-	struct Node *x = y->left_child;
-	struct Node *z = x->right_child;
-
-	x->right_child = y;
-	y->left_child = z;
-
-	y->height = max(height(y->left_child), height(y->right_child)) + 1;
-	x->height = max(height(x->left_child), height(x->right_child)) + 1;
-
-	return x;
-}
-struct Node *leftRotate(struct Node *x)
-{
-	struct Node *y = x->right_child;
-	struct Node *z = y->left_child;
-
-	y->left_child = x;
-	x->right_child = z;
-
-	x->height = max(height(x->left_child), height(x->right_child)) + 1;
-	y->height = max(height(y->left_child), height(y->right_child)) + 1;
-
-	return y;
-}
 
 /* root-ийн зааж буй зангилаагаар үндэсээ хийсэн дэд модонд d утгыг орууж шинээр үүссэн дэд модыг буцаана */
 struct Node *insert(struct Node *root, int d)
@@ -115,26 +79,6 @@ struct Node *insert(struct Node *root, int d)
 		root->right_child = insert(root->right_child, d);
 	else
 		root->left_child = insert(root->left_child, d);
-
-	root->height = height(root);
-	int balance = getBalance(root);
-	if (balance > 1 && d < root->left_child->data)
-		return rightRotate(root);
-
-	if (balance < -1 && d > root->right_child->data)
-		return leftRotate(root);
-
-	if (balance > 1 && d > root->left_child->data)
-	{
-		root->left_child = leftRotate(root->left_child);
-		return rightRotate(root);
-	}
-
-	if (balance < -1 && d < root->right_child->data)
-	{
-		root->right_child = rightRotate(root->right_child);
-		return leftRotate(root);
-	}
 	return root;
 }
 /* root-ийн зааж буй зангилаагаар үндэсээ хийсэн дэд модоос d утгыг устгаж шинээр үүссэн дэд модыг буцаана */
@@ -146,71 +90,39 @@ struct Node *find_min(struct Node *root)
 		return find_min(root->left_child);
 	return root;
 }
-/*struct node *minValueNode(struct node *node) {
-  struct node *current = node;
-
-  // Find the leftmost leaf
-  while (current && current->left != NULL)
-    current = current->left;
-
-  return current;
-}*/
 struct Node *removeE(struct Node *root, int d)
 {
 	if (root == NULL)
 		return root;
-	struct Node *temp;
-	root = find(root, d);
-	temp = root->left_child;
-
-	// if (root->data < d)
-	// 	root->right_child = removeE(root->right_child, d);
-	// else if (root->data > d)
-	// 	root->left_child = removeE(root->left_child, d);
-	// else
-	// {
-	// 	if (root->left_child == NULL && root->right_child == NULL)
-	// 	{
-	// 		delete_tree(root);
-	// 		return NULL;
-	// 	}
-	// 	else if (root->left_child == NULL || root->right_child == NULL)
-	// 	{
-	// 		struct Node *temp;
-	// 		if (root->left_child == NULL)
-	// 			temp = root->right_child;
-	// 		else
-	// 			temp = root->left_child;
-	// 		delete_tree(root);
-	// 		return temp;
-	// 	}
-	// 	else
-	// 	{
-	// 		struct Node *temp = find_min(root->right_child);
-	// 		root->data = temp->data;
-	// 		root->right_child = removeE(root->right_child, temp->data);
-	// 	}
-	// }
-	// int balance = getBalance(root);
-	// if (balance > 1 && getBalance(root->left_child) >= 0)
-	// 	return rightRotate(root);
-
-	// if (balance > 1 && getBalance(root->left_child) < 0)
-	// {
-	// 	root->left_child = leftRotate(root->left_child);
-	// 	return rightRotate(root);
-	// }
-
-	// if (balance < -1 && getBalance(root->right_child) <= 0)
-	// 	return leftRotate(root);
-
-	// if (balance < -1 && getBalance(root->right_child) > 0)
-	// {
-	// 	root->right_child = rightRotate(root->right_child);
-	// 	return leftRotate(root);
-	// }
-
-	// return root;
+	if (root->data < d)
+		root->right_child = removeE(root->right_child, d);
+	else if (root->data > d)
+		root->left_child = removeE(root->left_child, d);
+	else
+	{
+		if (root->left_child == NULL && root->right_child == NULL)
+		{
+			delete_tree(root);
+			return NULL;
+		}
+		else if (root->left_child == NULL || root->right_child == NULL)
+		{
+			struct Node *temp;
+			if (root->left_child == NULL)
+				temp = root->right_child;
+			else
+				temp = root->left_child;
+			delete_tree(root);
+			return temp;
+		}
+		else
+		{
+			struct Node *temp = find_min(root->right_child);
+			root->data = temp->data;
+			root->right_child = removeE(root->right_child, temp->data);
+		}
+	}
+	return root;
 }
 /* root-ийн зааж буй Tree-г in-order-оор хэвлэ */
 void inorder(struct Node *root)
