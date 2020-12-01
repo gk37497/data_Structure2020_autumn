@@ -28,6 +28,17 @@ void push_back(int h, struct Student x)
 {
 	struct Elm *_head = head[h];
 	struct Elm *_tail = tail[h];
+	struct Elm *temp;
+	temp->x = x;
+	temp->next = NULL;
+	if (_head == NULL && _tail == NULL)
+	{
+		_head = _tail = temp;
+	}else
+	{
+		_tail->next = temp;
+		temp->next = NULL;
+	}
 	/*
 	  Жагсаалтан хүснэгтэд h хайш индекс дээр оруулна
 	 */
@@ -44,10 +55,19 @@ void insert(const struct Student x)
 
 int hash(const char s[])
 {
+	char c[10];
+	int j = 0;
+	for (int i = strlen(s) - 1; i >= 0; i--)
+    {
+		c[j] = s[i];
+		j++;
+    }
+	return (atoi(c) % 13);
 	/*
 	  s - тэмдэгтэн цувааны хайшыг тооцоолоод буцаах функцыг
 	  хэрэгжүүлнэ үү.
 	 */
+
 	return 0;
 }
 
@@ -60,6 +80,18 @@ void init_hash_table()
 
 struct Student *search(const char id[])
 {
+	int h = hash(id);
+	struct Elm *_head = head[h];
+	struct Elm *_tail = tail[h];
+	while (_head != NULL)
+	{	
+		if (strcmp(_head->x.id , id) == 0)
+		{
+			return _head->x.id;
+		}
+	}
+	return NULL;
+	
 	/*
 	  Өгөгдсөн id-аар оюутны мэдээллийг хайх функц.
 	  Олдохгүй бол NULL утга буцаана.
@@ -102,7 +134,7 @@ int main()
 {
 	int n, i, j, m;
 	FILE *fin;
-	fin = fopen("student.info", "r");
+	fin = fopen("./test/student.info", "r");
 	if (fin == NULL) {
 		printf("student.info file oldsongui\n");
 		exit(1);
@@ -114,7 +146,7 @@ int main()
 		insert(x);
 	}
 	fclose(fin);
-	fin = fopen("input.txt", "r");
+	fin = fopen("./test/input.txt", "r");
 	char cmd[10];
 	fscanf(fin, "%d", &m);
 	FILE *fout = fopen("myoutput.txt", "w");
