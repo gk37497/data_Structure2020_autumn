@@ -1,19 +1,91 @@
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+// int main()
+// {
+
+//     char b[] = "DRS7183439";
+//     int a = b[0] + b[4];
+//     printf("%d \n", a);
+// }
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-int main (){
 
-    printf("HHAHHAAH = ");
-    int a = 0;
-    char b[100] = "DRS7183439";
-    char c[11];
-    for (int i = strlen(b) - 1; i >= 0; i--)
+#define size 7
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+struct node *chain[size];
+
+void init()
+{
+    int i;
+    for (i = 0; i < size; i++)
+        chain[i] = NULL;
+}
+
+void insert(int value)
+{
+    //create a newnode with value
+    struct node *newNode = malloc(sizeof(struct node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    //calculate hash key
+    int key = value % size;
+
+    //check if chain[key] is empty
+    if (chain[key] == NULL)
+        chain[key] = newNode;
+    //collision
+    else
     {
-        c[a] = b[i];
-        a++;
+        //add the node at the end of chain[key].
+        struct node *temp = chain[key];
+        while (temp->next)
+        {
+            temp = temp->next;
+        }
+
+        temp->next = newNode;
     }
-    int k = atoi(c); 
-    printf(" %s\n" ,c);
-    printf("HHAHHAAH = ");
-    printf("%d \n" ,k % 13);
+}
+
+void print()
+{
+    int i;
+
+    for (i = 0; i < size; i++)
+    {
+        struct node *temp = chain[i];
+        printf("chain[%d]-->", i);
+        while (temp)
+        {
+            printf("%d -->", temp->data);
+            temp = temp->next;
+        }
+        printf("NULL\n");
+    }
+}
+
+int main()
+{
+    //init array of list to NULL
+    init();
+
+    insert(7);
+    insert(0);
+    insert(3);
+    insert(10);
+    insert(4);
+    insert(5);
+
+    print();
+
+    return 0;
 }
